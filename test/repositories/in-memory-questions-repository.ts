@@ -25,4 +25,10 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
       (q) => q.id.toValue() !== question.id.toValue(),
     )
   }
+
+  async save(question: Question): Promise<void> {
+    this.questions = this.questions.map((q) =>
+      q.id.toValue() === question.id.toValue() ? question : q,
+    )
+  }
 }
