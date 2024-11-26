@@ -39,7 +39,7 @@ export class Answer extends Entity<AnswerProps> {
   }
 
   get questionId() {
-    return this.props.content
+    return this.props.questionId
   }
 
   get createdAt() {
