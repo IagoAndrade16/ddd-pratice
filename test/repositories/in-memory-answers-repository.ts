@@ -7,4 +7,14 @@ export class InMemoryAnswersRepository implements AnswersRepository {
   async create(answer: Answer): Promise<void> {
     this.answers.push(answer)
   }
+
+  async findById(id: string): Promise<Answer | null> {
+    return this.answers.find((answer) => answer.id.toValue() === id) || null
+  }
+
+  async delete(answer: Answer): Promise<void> {
+    this.answers = this.answers.filter(
+      (a) => a.id.toValue() !== answer.id.toValue(),
+    )
+  }
 }
