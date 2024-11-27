@@ -23,4 +23,14 @@ export class InMemoryAnswersRepository implements AnswersRepository {
       a.id.toValue() === answer.id.toValue() ? answer : a,
     )
   }
+
+  async findManyByQuestionId(
+    params: { page: number },
+    questionId: string,
+  ): Promise<Answer[]> {
+    return this.answers
+      .filter((a) => a.questionId.toValue() === questionId)
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      .slice((params.page - 1) * 20, params.page * 20)
+  }
 }
