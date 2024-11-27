@@ -22,4 +22,14 @@ export class InMemoryAnswerCommentsRepository
       (comment) => comment.id !== answerComment.id,
     )
   }
+
+  async findManyByAnswerId(
+    answerId: string,
+    params: { page: number },
+  ): Promise<AnswerComment[]> {
+    return this.answerComments
+      .filter((comment) => comment.answerId.toString() === answerId)
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      .slice((params.page - 1) * 20, params.page * 20)
+  }
 }

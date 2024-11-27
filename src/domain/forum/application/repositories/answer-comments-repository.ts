@@ -4,4 +4,8 @@ export interface AnswerCommentsRepository {
   create(answerComment: AnswerComment): Promise<void>
   delete(answerComment: AnswerComment): Promise<void>
   findById(id: string): Promise<AnswerComment | null>
+  findManyByAnswerId(
+    answerId: string,
+    options: { page: number },
+  ): Promise<AnswerComment[]>
 }
