@@ -26,7 +26,12 @@
   - Atendente
   - Barman
 
-- Agregados
+- Aggregate
+  - Entidades que existem a partir de uma entidade base
+  - São manipuladas ao mesmo tempo
+  - E.g.: Order -> OrderItem[]
+- Watched List
+  - Pattern que permite ter mais informações sobre o item em um array, como se é um item novo, um item editado, ou um item deletado
 - Value Objects
   - Entidades que possuem regras de negócios próprias
   - Quase tudo pode até virar value objects, porém só é necessário para coisas mais importantes, ou que contém muito código acumulado
