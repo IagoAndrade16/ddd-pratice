@@ -30,10 +30,12 @@ describe('fetch recent questions', () => {
       }),
     )
 
-    const { questions } = await sut.execute({
+    const result = await sut.execute({
       page: 1,
     })
 
+    expect(result.isRight()).toBeTruthy()
+    const questions = result.value!.questions
     expect(questions.length).toBe(3)
     expect(questions[0].createdAt).toEqual(new Date('2021-01-03'))
     expect(questions[1].createdAt).toEqual(new Date('2021-01-02'))
@@ -45,10 +47,11 @@ describe('fetch recent questions', () => {
       await inMemoryQuestionsRepository.create(makeQuestion({}))
     }
 
-    const { questions } = await sut.execute({
+    const result = await sut.execute({
       page: 2,
     })
 
-    expect(questions.length).toBe(2)
+    expect(result.isRight()).toBeTruthy()
+    expect(result.value?.questions.length).toBe(2)
   })
 })

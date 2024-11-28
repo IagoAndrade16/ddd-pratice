@@ -34,12 +34,13 @@ describe('fetch recent answers', () => {
       }),
     )
 
-    const { answers } = await sut.execute({
+    const result = await sut.execute({
       page: 1,
       questionId: new UniqueEntityID('1'),
     })
 
-    expect(answers.length).toBe(3)
+    expect(result.isRight()).toBeTruthy()
+    expect(result.value?.answers.length).toBe(3)
   })
 
   it('should be able to fetch paginated', async () => {
@@ -51,11 +52,12 @@ describe('fetch recent answers', () => {
       )
     }
 
-    const { answers } = await sut.execute({
+    const result = await sut.execute({
       page: 2,
       questionId: new UniqueEntityID('1'),
     })
 
-    expect(answers.length).toBe(2)
+    expect(result.isRight()).toBeTruthy()
+    expect(result.value?.answers.length).toBe(2)
   })
 })

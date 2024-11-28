@@ -1,4 +1,4 @@
-import { Either, right } from '@/core/either'
+import { Either, left, right } from '@/core/either'
 import { QuestionsRepository } from '../repositories/questions-repository'
 import { NotAllowedError } from './errors/not-allowed-error'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
@@ -27,11 +27,11 @@ export class EditQuestionUseCase {
     const question = await this.questionsRepository.findById(questionId)
 
     if (!question) {
-      return right(new ResourceNotFoundError())
+      return left(new ResourceNotFoundError())
     }
 
     if (question.authorId.toValue() !== authorId) {
-      return right(new NotAllowedError())
+      return left(new NotAllowedError())
     }
 
     question.content = content

@@ -10,13 +10,13 @@ describe('create answer', () => {
     sut = new AnswerQuestionUseCase(inMemoryAnswersRepository)
   })
   it('should be able to create a answer', async () => {
-    const answer = await sut.execute({
+    const result = await sut.execute({
       authorId: 'authorId',
       content: 'content',
       questionId: 'questionId',
     })
 
-    expect(answer.content).toBe('content')
-    expect(inMemoryAnswersRepository.answers).toHaveLength(1)
+    expect(result.isRight()).toBeTruthy()
+    expect(inMemoryAnswersRepository.answers.length).toBe(1)
   })
 })
